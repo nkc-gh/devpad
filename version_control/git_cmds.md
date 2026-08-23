@@ -129,6 +129,46 @@ Example — auto-use GitLab identity for anything inside `~/gitlab-projects/`:
 
 Now every repo created inside `~/gitlab-projects/` automatically uses the GitLab identity — no manual local config needed per folder.
 
+### Storing Password in .gitconfig
+
+You can store your GitHub Personal Access Token (PAT) so `git push` stops asking for it every time.
+
+**Set the credential helper**
+```bash
+git config --global credential.helper store
+```
+Next `git push`, enter your PAT as the password — git saves it in plain text at `~/.git-credentials`, and won't ask again.
+
+**Variations**
+
+```bash
+git config --global credential.helper cache
+```
+Keeps it only in memory, temporarily (default 15 min), never written to disk.
+
+```bash
+git config --global credential.helper "cache --timeout=3600"
+```
+Same as above, custom timeout in seconds (here, 1 hour).
+
+```bash
+git config --global credential.helper libsecret
+```
+Uses GNOME Keyring — encrypted, more secure than `store`. Needs:
+```bash
+sudo apt install libsecret-1-0 libsecret-1-dev
+```
+
+**Switching helpers** — just re-run the command with a new value, it overwrites the old setting. Note: switching away from `store` doesn't delete the old plain-text file — remove it manually if needed:
+```bash
+rm ~/.git-credentials
+```
+
+**Check current helper**
+```bash
+git config --global credential.helper
+```
+Only prints the helper name (e.g. `store`) — never the actual token. The token itself lives in `~/.git-credentials` (if using `store`) — never share or commit that file.
 
 ## Turning a Folder into a Git Repo
 
