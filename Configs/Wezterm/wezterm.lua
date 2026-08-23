@@ -19,4 +19,6 @@ config.colors = {
 
 config.default_cursor_style = 'SteadyBar' -- applies SteadyBar means | instead of block cursor style
 
+config.enable_tab_bar = false -- disables tab bar
+
 return config -- hands the finished config table back to wezterm, which reads it to apply all your settings
