@@ -10,7 +10,7 @@ config.font_size = 12.0 -- WezTerm-specific: unit is POINTS, not pixels — stay
 
 config.line_height = 1.2 -- WezTerm-specific field; not a general Lua/config concept
 
-config.front_end = 'WebGpu' -- WezTerm-specific field; only 3 valid values: WebGpu (default), OpenGL, Software
+config.front_end = 'WebGpu' -- WezTerm-specific field; only 3 valid values: WebGpu, OpenGL, Software
 
 config.colors = {
   background = '#000000', -- applies background color of black
