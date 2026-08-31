@@ -1,10 +1,10 @@
 local wezterm = require 'wezterm' -- fetches the pre-built module (table of functions) wezterm provides
 
-local config = wezterm.config_builder() -- WezTerm-specific function; returns a defaults table WITH validation (vs old style: local config = {}, which silently ignores typos)
+local config = {} -- creates a table in which i can assign values
 
 config.default_prog = { '/usr/bin/zsh' } -- WezTerm's actual field name for "program to run on start" — not "shell", since it accepts any program
 
-config.font = wezterm.font('Ubuntu Mono', { weight = 'Medium' }) -- wezterm.font() is a WezTerm function; 2nd arg's accepted keys (weight, stretch, style) are documented per-function at wezterm.org, not guessable from Lua alone
+config.font = wezterm.font('Ubuntu Mono', { weight = 'Medium' }) -- wezterm.font() passses these values to its internal tool and fills with other values and hand over to config.font
 
 config.font_size = 12.0 -- WezTerm-specific: unit is POINTS, not pixels — stays physically consistent across different screen DPIs
 
@@ -20,5 +20,14 @@ config.colors = {
 config.default_cursor_style = 'SteadyBar' -- applies SteadyBar means | instead of block cursor style
 
 config.enable_tab_bar = false -- disables tab bar
+
+config.scrollback_lines = 2000 -- scrollback limits to 2000 lines
+
+-- open at maximized
+
+wezterm.on('gui-startup', function(cmd)
+  local tab, pane, window = wezterm.mux.spawn_window(cmd or {})
+  window:gui_window():maximize()
+end)
 
 return config -- hands the finished config table back to wezterm, which reads it to apply all your settings
