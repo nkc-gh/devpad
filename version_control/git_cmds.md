@@ -78,6 +78,23 @@ If you prefer to keep `master` as your default, use:
 git config --global init.defaultBranch master
 ```
 
+### Add Password for future git push
+
+if your link starts with https then use this
+
+1. Windows -> git config --global credential.helper wincred
+2. Mac -> git config --global credential.helper osxkeychain
+3. Linux -> git config --global credential.helper store
+
+so after this next time you will enter your password for git push this will store it and you wont be asked password next time.
+
+and if you just want for a specific time then use
+
+```git config --global credential.helper 'cache --timeout=14400'```
+
+time here is in seconds so 14400 = 4 hours. this is a much safer option.
+
+
 ### Which config is actually active right now?
 
 ```bash
