@@ -5,6 +5,7 @@
 - [How to Install Git on different machines](#how-to-install-git-on-different-machines)
 - [Git Config](#git-config)
 - [Turning a Folder into a Git Repo](#turning-a-folder-into-a-git-repo)
+- [Changing Origin Branch Link](#changing-origin-branch-link)
 - [Git Add](#git-add)
 - [Git Commit](#git-commit)
 
@@ -60,6 +61,22 @@ git config --list --local
 **Note on system/global:** both are a single file each (not per-folder), so they can be checked from anywhere:
 - System → `/etc/gitconfig`
 - Global → `~/.gitconfig`
+
+### Set Global Default Branch
+
+Instead of manually typing `git init` followed by `git branch -M main`, you can tell Git to always create a `main` branch by default when you run `git init` anywhere on your system. This is a global setting.
+
+To set the global default branch to `main` (which is now the industry standard, replacing `master`), use:
+
+```bash
+git config --global init.defaultBranch main
+```
+
+If you prefer to keep `master` as your default, use:
+
+```bash
+git config --global init.defaultBranch master
+```
 
 ### Which config is actually active right now?
 
@@ -199,6 +216,21 @@ If the repo already exists online:
 git clone https://github.com/username/repo.git
 ```
 This downloads it and sets it up as a local repo **with the remote already linked** — no `git init` or `git remote add` needed, clone does both automatically.
+
+## Changing Origin Branch Link
+
+- If you want to change the Origin branch Link then first go to your git folder and then use this
+
+```
+git branch -u origin/new-branch-name
+```
+(Note: -u is a shortcut for --set-upstream-to [Git Documentation])
+
+- and then check using
+
+```git remote -v
+```
+
 
 ## Git Add
  
